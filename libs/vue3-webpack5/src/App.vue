@@ -7,9 +7,9 @@
 <script setup>
 import { defineAsyncComponent } from "vue";
 
-const WeatherConsumer = defineAsyncComponent(() =>
-  import("./components/WeatherConsumer").then((mod) => mod.WeatherConsumer)
-);
+const WeatherConsumer = defineAsyncComponent(async () => {
+  return (await import("./components/WeatherConsumer")).WeatherConsumer;
+});
 </script>
 
 <style scoped>
@@ -24,4 +24,3 @@ img {
   margin: auto;
 }
 </style>
-

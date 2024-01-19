@@ -39,8 +39,6 @@ export const WeatherConsumer = import("app_host/hDemi").then((h) =>
       };
 
       if ("default" in h) h = h.default;
-      console.log(111, h);
-
       return () =>
         h(
           "div",
