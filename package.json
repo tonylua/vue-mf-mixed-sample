@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev2": "npm run dev --perfix libs/vue3-webpack5",
-    "dev": "webpack serve --config config/webpack.dev.js",
+    "dev:self": "webpack serve --config config/webpack.dev.js",
+    "dev": "concurrently \"npm run dev:self\" \"npm run dev --prefix libs/vue3-webpack5\" \"npm run dev --prefix libs/vue3-vite\"",
     "prod": "webpack --config config/webpack.prod.js"
   },
   "keywords": [],

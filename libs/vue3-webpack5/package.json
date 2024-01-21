@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "webpack serve --config ./webpack.dev.js",
-    "prod": "webpack --config ./webpack.prod.js"
+    "build": "webpack --config ./webpack.prod.js"
   },
   "keywords": [],
   "author": "",

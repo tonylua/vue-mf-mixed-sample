@@ -33,6 +33,7 @@ module.exports = {
       },
       remotes: {
         app_v3w5: "app2@http://localhost:3002/remoteEntry.js",
+        app_v3vite: "app3@http://localhost:3003/remoteEntry.js",
       },
       shared: { vue: { singleton: true } },
     }),
@@ -66,4 +67,3 @@ module.exports = {
     ],
   },
 };
-
