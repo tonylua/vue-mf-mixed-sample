@@ -33,12 +33,6 @@ const Comp5 = vue2ToVue3(Vue2_2, Vue2Button_2, "comp5-container");
 const onButtonClick = (e) => {
   temp2.value += 1;
 };
-
-// try {
-//   const xxx = import("app_v2w4/Hello");
-// } catch (ex) {
-//   console.log(ex);
-// }
 </script>
 
 <style scoped>

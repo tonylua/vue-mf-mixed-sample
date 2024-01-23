@@ -1,19 +1,15 @@
 const ModuleFederationPlugin = require("mf-webpack4");
+const webpack = require("webpack");
 
 module.exports = {
   parallel: false,
   productionSourceMap: false,
   publicPath: "http://localhost:3004/",
-  // chainWebpack: (config) => {
-  //   config.output.publicPath = "auto";
-  // },
   configureWebpack: {
-    optimization: {
-      minimize: false,
-    },
+    optimization: {},
     output: {
       filename: "[name].js",
-      chunkFilename: "[name]-[chunkhash].js",
+      // chunkFilename: "[name]-[chunkhash].js",
       path: `${__dirname}/dist`,
     },
     devServer: {
@@ -37,6 +33,12 @@ module.exports = {
         },
       }),
     ],
+  },
+  chainWebpack: (config) => {
+    config.optimization.delete("splitChunks");
+    config
+      .plugin("limitSplitChunks")
+      .use(webpack.optimize.LimitChunkCountPlugin, [{ maxChunks: 1 }]);
   },
   css: {
     sourceMap: true,
