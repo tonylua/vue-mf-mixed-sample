@@ -1,5 +1,3 @@
-import Vue2 from "app_v2w5/vue2";
-
 function bindSlotContext(target = {}, context) {
   return Object.keys(target).map((key) => {
     const vnode = target[key];
@@ -11,7 +9,7 @@ function bindSlotContext(target = {}, context) {
 /*
  * Transform vue2 components to DOM.
  */
-export function vue2ToVue3(WrapperComponent, wrapperId) {
+export function vue2ToVue3(Vue2, WrapperComponent, wrapperId) {
   let vm;
   return {
     mounted() {

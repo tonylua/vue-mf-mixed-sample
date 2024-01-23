@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev:self": "webpack serve --config config/webpack.dev.js",
-    "dev": "concurrently \"npm run dev:self\" \"npm run dev --prefix libs/vue3-webpack5\" \"npm run dev --prefix libs/vue2-webpack5\"",
-    "prod": "webpack --config config/webpack.prod.js"
+    "dev:self": "webpack serve --config ./webpack.dev.js",
+    "dev": "concurrently \"npm run dev:self\" \"npm run dev --prefix libs/app2-vue3-webpack5\" \"npm run dev --prefix libs/app4-vue2-webpack4\" \"npm run dev --prefix libs/app5-vue2-webpack5\"",
+    "prod": "webpack --config ./webpack.prod.js"
   },
   "keywords": [],
   "author": "",

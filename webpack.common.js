@@ -4,7 +4,7 @@ const { ModuleFederationPlugin } = require("webpack").container;
 const { VueLoaderPlugin } = require("vue-loader");
 
 //Just to help us with directories and folders path
-const __base = path.resolve(__dirname, "..");
+const __base = path.resolve(__dirname, ".");
 const __src = path.resolve(__base, "src");
 
 module.exports = {
@@ -29,14 +29,13 @@ module.exports = {
       name: "app1",
       filename: "remoteEntry.js",
       exposes: {
-        "./hDemi": path.resolve(__dirname, "../src/utils/h-demi"),
+        "./hDemi": path.resolve(__dirname, "./src/utils/h-demi"),
       },
-      // remoteType: "system",
       remotes: {
         app_v3w5: "app2@http://localhost:3002/remoteEntry.js",
-        // app_v3vite: "app3@http://localhost:3003/dist/assets/remoteEntry.js",
-        // app_v2w4: "app4@http://localhost:3004/js/remoteEntry.js",
+        app_v2w4: "app4@http://localhost:3004/remoteEntry.js",
         app_v2w5: "app5@http://localhost:3005/remoteEntry.js",
+        // app_v3vite: "app3@http://localhost:3003/dist/assets/remoteEntry.js",
       },
       shared: { vue: { singleton: true } },
     }),
