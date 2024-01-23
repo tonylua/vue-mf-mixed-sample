@@ -3,8 +3,6 @@
 </template>
 
 <script setup>
-// import { defineProps, defineEmits } from "vue-demi";
-
 const props = defineProps({
   text: {
     type: String,

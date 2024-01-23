@@ -44,12 +44,16 @@ module.exports = (env = {}) => ({
       filename: "[name].css",
     }),
     new ModuleFederationPlugin({
+      // remotes: {
+      //   app_host: `app1@http://localhost:3001/remoteEntry.js`,
+      // },
       name: "app5",
       filename: "remoteEntry.js",
       library: { type: "var", name: "app5" },
       exposes: {
         "./vue2": "./node_modules/vue/dist/vue",
-        "./Button": "./src/components/Button",
+        "./Button": "./src/components/Button.vue",
+        // "./Button2": "./src/components/Button2.js",
       },
     }),
     new HtmlWebpackPlugin({
