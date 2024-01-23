@@ -1,10 +1,10 @@
 import { fileURLToPath, URL } from "node:url";
-import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import federation from "@originjs/vite-plugin-federation";
 import topLevelAwait from "vite-plugin-top-level-await";
+// import legacy from "@vitejs/plugin-legacy";
 
 export default defineConfig({
   base: "./",
@@ -18,12 +18,14 @@ export default defineConfig({
     federation({
       name: "app3",
       filename: "remoteEntry.js",
-      library: { type: "module" },
       exposes: {
         "./WC": "./src/components/WeatherConsumer.vue",
       },
       shared: ["vue"],
     }),
+    // legacy({
+    //   targets: ["defaults", "not IE 11"],
+    // }),
   ],
   resolve: {
     alias: {
@@ -36,10 +38,13 @@ export default defineConfig({
     proxy: {},
   },
   build: {
+    target: "esnext",
+    minify: false,
+    cssCodeSplit: true,
     rollupOptions: {
-      assetsDir: "public",
-      outDir: "dist",
       output: {
+        // format: "system",
+        minifyInternalExports: false,
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,
