@@ -1,1 +1,3 @@
-# vue module federation mixed sample
+npm i
+
+npm run dev
