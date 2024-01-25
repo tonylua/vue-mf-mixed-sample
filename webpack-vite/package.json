@@ -1,15 +1,16 @@
 {
   "name": "webpack-vite-sample",
-  "description": "This project is a mix of `webpack-federation` and `vite-federation`",
+  "private": true,
   "version": "0.0.0",
   "scripts": {
     "start": "pnpm --parallel --filter webpack-vite-sample_* start",
     "build": "pnpm --parallel --filter webpack-vite-sample_* build",
     "serve": "pnpm --parallel --filter webpack-vite-sample_* serve",
-    "preview": "pnpm build && pnpm serve"
+    "preview": "pnpm build && pnpm serve",
+    "postinstall": "concurrently \"cd vite-side && pnpm i\" \"cd webpack-side && pnpm i\""
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "wait-on": "7.2.0"
-  },
-  "private": true
+  }
 }
