@@ -35,7 +35,6 @@ module.exports = {
         app_v3w5: "app2@http://localhost:3002/remoteEntry.js",
         app_v2w4: "app4@http://localhost:3004/remoteEntry.js",
         app_v2w5: "app5@http://localhost:3005/remoteEntry.js",
-        // app_v3vite: "app3@http://localhost:3003/dist/assets/remoteEntry.js",
       },
       shared: { vue: { singleton: true } },
     }),
