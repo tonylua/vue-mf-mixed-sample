@@ -1,5 +1,5 @@
 {
-  "name": "vue2-in-vue3_vue2",
+  "name": "vue2-webpack5-app5",
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack-cli serve",

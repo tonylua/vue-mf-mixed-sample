@@ -1,29 +1,16 @@
 {
-  "name": "minimal-vue-webpack",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "dev:self": "webpack serve --config ./webpack.dev.js",
-    "dev": "concurrently \"npm run dev:self\" \"npm run dev --prefix libs/app2-vue3-webpack5\" \"npm run dev --prefix libs/app4-vue2-webpack4\" \"npm run dev --prefix libs/app5-vue2-webpack5\"",
-    "prod": "webpack --config ./webpack.prod.js"
+  "name": "mf-demo-webpack-webpack",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "lerna run dev",
+    "build": "lerna run build",
+    "postinstall": "concurrently \"cd packages/app1-vue3-webpack5 && pnpm i\" \"cd packages/app2-vue3-webpack5 && pnpm i\" \"cd packages/app4-vue2-webpack4 && npm i\" \"cd packages/app5-vue2-webpack5 && pnpm i\""
+  },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "css-loader": "^6.7.3",
-    "html-webpack-plugin": "^5.5.1",
-    "vue": "^3.2.47",
-    "vue-loader": "^17.1.0",
-    "vue-style-loader": "^4.1.3",
-    "vue-template-compiler": "^2.7.14",
-    "webpack": "^5.82.0",
-    "webpack-cli": "^5.0.2",
-    "webpack-dev-server": "^4.13.3",
-    "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {
-    "vue-demi": "^0.14.6"
+    "lerna": "^8.0.2"
   }
 }
