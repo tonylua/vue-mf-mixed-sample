@@ -14,6 +14,7 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, "dist"),
     port: 3002,
+    open: false,
   },
 
   //Output: result of the bundle after webpack run
@@ -66,4 +67,3 @@ module.exports = {
     ],
   },
 };
-

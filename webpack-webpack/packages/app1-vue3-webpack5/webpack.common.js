@@ -2,6 +2,15 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const { VueLoaderPlugin } = require("vue-loader");
+// const viteFed = require("@originjs/vite-plugin-federation");
+//
+// const v = viteFed({
+//   name: "vite-host-dynamic",
+//   remotes: {},
+//   shared: ["vue"],
+// });
+// v.options({});
+// v.load("fake-plugin1");
 
 //Just to help us with directories and folders path
 const __base = path.resolve(__dirname, ".");
@@ -22,6 +31,10 @@ module.exports = {
     path: path.resolve(__base, "dist"),
     clean: true,
   },
+
+  // experiments: {
+  //   outputModule: true,
+  // },
 
   //Plugins to help and include additionals functionalities to webpack
   plugins: [
