@@ -1,9 +1,4 @@
 const remotesMap = {};
-// remotesMap[ViteRemoteName] = {
-//   url: "http://localhost:3003/assets/remoteEntry.js",
-//   format: "esm",
-//   from: "vite",
-// };
 
 const loadJS = async (url, fn) => {
   const resolvedUrl = typeof url === "function" ? await url() : url;
@@ -23,6 +18,7 @@ const loadJS = async (url, fn) => {
 //     })
 // }
 
+// TODO
 const wrapShareModule = (remoteFrom) => {
   return {
     // vue: xxx
@@ -106,10 +102,21 @@ function __federation_method_setRemote(remoteName, remoteConfig) {
   remotesMap[remoteName] = remoteConfig;
 }
 
-export default {
-  ensure: __federation_method_ensure,
-  getRemote: __federation_method_getRemote,
-  setRemote: __federation_method_setRemote,
-  unwrapDefault: __federation_method_unwrapDefault,
-  wrapDefault: __federation_method_wrapDefault,
+// export default {
+// ensure: __federation_method_ensure,
+// getRemote: __federation_method_getRemote,
+// setRemote: __federation_method_setRemote,
+// unwrapDefault: __federation_method_unwrapDefault,
+// wrapDefault: __federation_method_wrapDefault,
+// }
+export const importViteESM = async (remoteEntryURL, moduleName) => {
+  const id = crypto.randomUUID();
+  __federation_method_setRemote(id, {
+    url: remoteEntryURL,
+    format: "esm",
+    from: "vite",
+  });
+  const vRemote = await __federation_method_ensure(id);
+  const comp = await vRemote.get(moduleName);
+  return comp();
 };

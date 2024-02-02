@@ -8,7 +8,7 @@
   </Suspense>
 
   <Suspense>
-    <Comp3 />
+    <Comp3 msg="😄DYNAMIC" />
     <template #fallback> vue3+vite 组件加载失败 </template>
   </Suspense>
 
@@ -28,7 +28,7 @@ import Vue2_1 from "app_v2w4/vue2";
 import Vue2Button_1 from "app_v2w4/Hello";
 import Vue2_2 from "app_v2w5/vue2";
 import Vue2Button_2 from "app_v2w5/Button";
-import vmf from "./utils/vite.fede";
+import { importViteESM } from "./utils/vite.fede";
 
 const temp2 = ref(30);
 const Comp2 = defineAsyncComponent(async () => {
@@ -40,16 +40,9 @@ const onButtonClick = (e) => {
   temp2.value += 1;
 };
 
-const Comp3 = defineAsyncComponent(async () => {
-  vmf.setRemote("viteDynamic1", {
-    url: "http://localhost:3003/assets/remoteEntry.js",
-    format: "esm",
-    from: "vite",
-  });
-  const vRemote = await vmf.ensure("viteDynamic1");
-  const comp = await vRemote.get("./Content");
-  return comp();
-});
+const Comp3 = defineAsyncComponent(() =>
+  importViteESM("http://localhost:3003/assets/remoteEntry.js", "./Content")
+);
 </script>
 
 <style scoped>
