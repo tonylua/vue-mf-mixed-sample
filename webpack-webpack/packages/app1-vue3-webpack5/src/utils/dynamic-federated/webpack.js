@@ -10,14 +10,10 @@ import {
   findModule,
 } from "module-federation-runtime";
 
-/**
- * @type {import('./types.d.ts').DynamicGetFederated}
- */
-export const getWebpackFederated = async (
-  remoteAppName, // 是对方remoteEntry实际暴露的名称，而不是本项目webpack配置中重命名的
-  remoteEntryURL,
-  ...componentNames
-) => {
+/** @type {import('./types.d.ts').DynamicGetFederated} */
+export const getWebpackFederated = async (options, ...componentNames) => {
+  const { remoteAppName, remoteEntryURL } = options;
+
   await registerRemotes({
     [remoteAppName]: {
       url: remoteEntryURL,

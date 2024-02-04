@@ -1,5 +1,5 @@
 <template>
-  <div @click="click" style="padding: 2em; font-size: 30px">
+  <div @click="click" style="padding: 10px 1em; font-size: 30px">
     Vite Content {{ msg }}
   </div>
 </template>

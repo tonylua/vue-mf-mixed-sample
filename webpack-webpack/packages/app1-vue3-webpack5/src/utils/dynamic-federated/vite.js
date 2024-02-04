@@ -19,19 +19,19 @@ const loadJS = async (url, fn) => {
 // }
 
 // TODO
-export const wrapShareModule = (remoteFrom) => {
+const wrapShareModule = (remoteFrom) => {
   return {
     // vue: xxx
   };
 };
 
-export async function __federation_import(name) {
+async function __federation_import(name) {
   return System.import(name);
 }
 
 const initMap = Object.create(null);
 
-export async function __federation_method_ensure(remoteId) {
+async function __federation_method_ensure(remoteId) {
   const remote = remotesMap[remoteId];
   if (!remote.inited) {
     if ("var" === remote.format) {
@@ -76,13 +76,13 @@ export async function __federation_method_ensure(remoteId) {
   }
 }
 
-export function __federation_method_unwrapDefault(module) {
+function __federation_method_unwrapDefault(module) {
   return module?.__esModule || module?.[Symbol.toStringTag] === "Module"
     ? module.default
     : module;
 }
 
-export function __federation_method_wrapDefault(module, need) {
+function __federation_method_wrapDefault(module, need) {
   if (!module?.default && need) {
     let obj = Object.create(null);
     obj.default = module;
@@ -92,24 +92,20 @@ export function __federation_method_wrapDefault(module, need) {
   return module;
 }
 
-export async function __federation_method_getRemote(remoteName, componentName) {
+async function __federation_method_getRemote(remoteName, componentName) {
   return __federation_method_ensure(remoteName).then((remote) =>
     remote.get(componentName).then((factory) => factory())
   );
 }
 
-export function __federation_method_setRemote(remoteName, remoteConfig) {
+function __federation_method_setRemote(remoteName, remoteConfig) {
   remotesMap[remoteName] = remoteConfig;
 }
 
-/**
- * @type {import('./types.d.ts').DynamicGetFederated}
- */
-export const getViteFederated = async (
-  remoteAppName,
-  remoteEntryURL,
-  ...componentNames
-) => {
+/** @type {import('./types.d.ts').DynamicGetFederated} */
+export const getViteFederated = async (options, ...componentNames) => {
+  const { remoteAppName, remoteEntryURL } = options;
+
   __federation_method_setRemote(remoteAppName, {
     url: () => Promise.resolve(remoteEntryURL),
     format: "esm",
