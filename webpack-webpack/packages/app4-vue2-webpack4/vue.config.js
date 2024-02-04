@@ -30,6 +30,7 @@ module.exports = {
         exposes: {
           "./vue2": "./node_modules/vue/dist/vue",
           "./Hello": "./src/components/HelloWorld.vue",
+          "./Dynamic": "./src/components/HelloDynamic.vue",
         },
       }),
     ],

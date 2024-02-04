@@ -18,7 +18,7 @@
   </fieldset>
 
   <fieldset>
-    <legend>remote: vue3 + vite</legend>
+    <legend>remote(dynamic): vue3 + vite</legend>
     <Suspense>
       <Comp3 msg="😄DYNAMIC" />
       <template #fallback> vue3+vite 组件加载... </template>
@@ -33,10 +33,20 @@
   </fieldset>
 
   <fieldset>
-    <legend>remote: vue3 + webpack5</legend>
+    <legend>remote(dynamic): vue3 + webpack5</legend>
     <Suspense>
       <Comp6 msg="😏DYNAMIC" />
       <template #fallback> vue3+webpack5 组件动态加载... </template>
+    </Suspense>
+  </fieldset>
+
+  <fieldset>
+    <legend>remote(dynamic): vue2 + webpack4</legend>
+    <Suspense>
+      <div id="comp7-container">
+        <Comp7 :num="temp2" />
+      </div>
+      <template #fallback> vue2+webpack4 组件动态加载... </template>
     </Suspense>
   </fieldset>
 </template>
@@ -85,6 +95,20 @@ const Comp6 = defineAsyncComponent(
       )
     ).find((item) => item.name === "Title")?.component
 );
+// 动态加载 vue2 + webpack4
+const Comp7 = defineAsyncComponent(async () => {
+  const { component } = (
+    await getRemoteDynamic(
+      {
+        remoteType: "webpack",
+        remoteAppName: "app4",
+        remoteEntryURL: "http://localhost:3004/remoteEntry.js",
+      },
+      "Dynamic"
+    )
+  ).find((item) => item.name === "Dynamic");
+  return vue2ToVue3(remoteVue2Instance1, component.default, "comp7-container");
+});
 
 const temp2 = ref(30);
 const onButtonClick = (e) => {
