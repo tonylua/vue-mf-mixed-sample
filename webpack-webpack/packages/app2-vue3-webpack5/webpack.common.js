@@ -31,6 +31,7 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         "./WC": path.resolve(__dirname, "./src/components/WeatherConsumer.js"),
+        "./Title": path.resolve(__dirname, "./src/components/Title.vue"),
       },
       remotes: {
         app_host: "app1@http://localhost:3001/remoteEntry.js",

@@ -22,6 +22,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "module-federation-runtime": "^1.2.4",
     "vue-demi": "^0.14.6"
   }
 }

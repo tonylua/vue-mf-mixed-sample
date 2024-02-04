@@ -19,19 +19,19 @@ const loadJS = async (url, fn) => {
 // }
 
 // TODO
-const wrapShareModule = (remoteFrom) => {
+export const wrapShareModule = (remoteFrom) => {
   return {
     // vue: xxx
   };
 };
 
-async function __federation_import(name) {
+export async function __federation_import(name) {
   return System.import(name);
 }
 
 const initMap = Object.create(null);
 
-async function __federation_method_ensure(remoteId) {
+export async function __federation_method_ensure(remoteId) {
   const remote = remotesMap[remoteId];
   if (!remote.inited) {
     if ("var" === remote.format) {
@@ -76,13 +76,13 @@ async function __federation_method_ensure(remoteId) {
   }
 }
 
-function __federation_method_unwrapDefault(module) {
+export function __federation_method_unwrapDefault(module) {
   return module?.__esModule || module?.[Symbol.toStringTag] === "Module"
     ? module.default
     : module;
 }
 
-function __federation_method_wrapDefault(module, need) {
+export function __federation_method_wrapDefault(module, need) {
   if (!module?.default && need) {
     let obj = Object.create(null);
     obj.default = module;
@@ -92,31 +92,39 @@ function __federation_method_wrapDefault(module, need) {
   return module;
 }
 
-async function __federation_method_getRemote(remoteName, componentName) {
+export async function __federation_method_getRemote(remoteName, componentName) {
   return __federation_method_ensure(remoteName).then((remote) =>
     remote.get(componentName).then((factory) => factory())
   );
 }
 
-function __federation_method_setRemote(remoteName, remoteConfig) {
+export function __federation_method_setRemote(remoteName, remoteConfig) {
   remotesMap[remoteName] = remoteConfig;
 }
 
-// export default {
-// ensure: __federation_method_ensure,
-// getRemote: __federation_method_getRemote,
-// setRemote: __federation_method_setRemote,
-// unwrapDefault: __federation_method_unwrapDefault,
-// wrapDefault: __federation_method_wrapDefault,
-// }
-export const importViteESM = async (remoteEntryURL, moduleName) => {
-  const id = crypto.randomUUID();
-  __federation_method_setRemote(id, {
-    url: remoteEntryURL,
+/**
+ * @type {import('./types.d.ts').DynamicGetFederated}
+ */
+export const getViteFederated = async (
+  remoteAppName,
+  remoteEntryURL,
+  ...componentNames
+) => {
+  __federation_method_setRemote(remoteAppName, {
+    url: () => Promise.resolve(remoteEntryURL),
     format: "esm",
     from: "vite",
   });
-  const vRemote = await __federation_method_ensure(id);
-  const comp = await vRemote.get(moduleName);
-  return comp();
+  const res = [];
+  for await (let value of componentNames) {
+    const moduleWraped = await __federation_method_getRemote(
+      remoteAppName,
+      `./${value}`
+    );
+    res.push({
+      name: value,
+      component: __federation_method_unwrapDefault(moduleWraped),
+    });
+  }
+  return res;
 };
