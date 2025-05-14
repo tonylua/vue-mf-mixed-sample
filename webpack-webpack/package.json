@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "lerna run dev",
     "build": "lerna run build",
-    "postinstall": "concurrently \"cd packages/app1-vue3-webpack5 && pnpm i\" \"cd packages/app2-vue3-webpack5 && pnpm i\" \"cd packages/app4-vue2-webpack4 && npm i\" \"cd packages/app5-vue2-webpack5 && pnpm i\""
+    "postinstall": "concurrently \"cd packages/app1-vue3-webpack5 && pnpm i\" \"cd packages/app2-vue3-webpack5 && pnpm i\" \"cd packages/app3-vue3-vite && pnpm i\" \"cd packages/app4-vue2-webpack4 && npm i\" \"cd packages/app5-vue2-webpack5 && pnpm i\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

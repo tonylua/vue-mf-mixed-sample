@@ -5,12 +5,12 @@ module.exports = {
   parallel: false,
   productionSourceMap: false,
   publicPath: "http://localhost:3004/",
+  outputDir: `${__dirname}/dist`,
   configureWebpack: {
     optimization: {},
     output: {
       filename: "[name].js",
-      // chunkFilename: "[name]-[chunkhash].js",
-      path: `${__dirname}/dist`,
+      // path: `${__dirname}/dist`,
     },
     devServer: {
       hot: true,
